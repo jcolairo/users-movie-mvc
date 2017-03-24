@@ -1,0 +1,17 @@
+{
+  "name": "sg-webdev4-project-2",
+  "description": "Project 2 for Sparta Global Webdev 4",
+  "main": "server.js",
+  "authors": [],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
