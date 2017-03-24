@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var validationRules = {
-  title: {
+  name: {
     type: String,
     required: true
   },
-  year: {
-    type: Number
-  },
-  genre: {
+  // year: {
+  //   type: Number
+  // },
+  handle: {
     type: String
   }
 };

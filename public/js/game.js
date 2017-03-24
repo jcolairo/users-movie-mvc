@@ -22,7 +22,7 @@ var User = {
         }
       );
     },
-    show: function (user) {
+    show: function () {
       // TODO: implement
     },
     new: function () {
@@ -38,18 +38,18 @@ var User = {
   // the following object contains methods related to generating the View - ie, the HTML:
   view: {
     // this maps directly to the `index` route (remember the 7 RESTful routes?)
-    index: function (users) {
+    index: function (user) {
       var html = `
         <h2>Users</h2>
         <ul>
       `;
 
-      for(var i = 0; i < users.length ; i++) {
+      for(var i = 0; i < user.length ; i++) {
         // TODO: fill this in properly!
         // For example:
         //   - add buttons to view, edit & delete this user
         //   - on each button, you can add an `onclick` attribute that calls the relevant method on `User.controller`
-        html += `<li>${users[i].title}</li>`;
+        html += `<li>${user[i].title}</li>`;
       }
 
       html += `</ul>`;
@@ -61,7 +61,7 @@ var User = {
       // TODO: implement
     },
     // generate the HTML to edit an existing User
-    edit: function (user) {
+    edit: function () {
       // TODO: implement
     }
   },

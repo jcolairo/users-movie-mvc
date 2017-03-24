@@ -6,15 +6,15 @@ var validationRules = {
     type: String,
     required: true
   },
-  lastName: {
+  genre: {
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    required: true
-  },
-  movies: [
+  // email: {
+  //   type: String,
+  //   required: true
+  // },
+  players: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Movie'
