@@ -49,10 +49,23 @@ var User = {
         // For example:
         //   - add buttons to view, edit & delete this user
         //   - on each button, you can add an `onclick` attribute that calls the relevant method on `User.controller`
-        html += `<li>${user[i].title}</li>`;
+        html += `<li>
+        ${user[i].firstName}
+        ${user[i].lastName}
+        </li>
+        `;
       }
 
       html += `</ul>`;
+
+      html+= `
+      <form id="form-user">
+        <input id="create-input" type="text" name="firstName" placeholder="First Name">
+        <input type="text" name="lastName" placeholder="Last Name">
+        <input type="email" name="email" placeholder="Email">
+        <button id="btn-user-create">Create</button>
+      </form>
+      `;
 
       return html;
     },
