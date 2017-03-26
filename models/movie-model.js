@@ -5,9 +5,9 @@ var validationRules = {
     type: String,
     required: true
   },
-  // year: {
-  //   type: Number
-  // },
+  year: {
+    type: Number
+  },
   handle: {
     type: String
   }

@@ -8,8 +8,11 @@ router.get('/users', function (req, res) {
   // and of course this will be in a separate controller file, as we've done before
   res.json([
     {
-      firstName: 'Freddie',
-      lastName: 'Mercury'
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+      // firstName: 'Freddie',
+      // lastName: 'Mercury'
       // email: 'freddie@exmaple.com'
     },
     {
@@ -23,6 +26,10 @@ router.get('/users', function (req, res) {
       // email: 'bSmithe@example.com'
     }
   ]);
+});
+
+router.post('/users', function (req, res) {
+  console.log(req.body);
 });
 
 

@@ -2,18 +2,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var validationRules = {
-  title: {
+  firstName: {
     type: String,
     required: true
   },
-  genre: {
+  lastName: {
     type: String,
     required: true
   },
-  // email: {
-  //   type: String,
-  //   required: true
-  // },
+  email: {
+    type: String,
+    required: true
+  },
   players: [
     {
       type: Schema.Types.ObjectId,

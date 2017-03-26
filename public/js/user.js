@@ -59,7 +59,7 @@ var User = {
       html += `</ul>`;
 
       html+= `
-      <form id="form-user">
+      <form action="/users" method="POST" id="form-user">
         <input id="create-input" type="text" name="firstName" placeholder="First Name">
         <input type="text" name="lastName" placeholder="Last Name">
         <input type="email" name="email" placeholder="Email">
