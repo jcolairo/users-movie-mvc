@@ -25,8 +25,33 @@ var User = {
     show: function () {
       // TODO: implement
     },
+    create: function (userId) {
+      var $content = $('#content');
+
+      User.model.show(
+        userId,
+        function success(data) {
+          var showHtml = User.view.edit(data);
+
+          $content.html(showHtml);
+        },
+        function error(err) {
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
+    },
     new: function () {
-      // TODO: implement
+      var $content = $('#content');
+
+      User.model.create(
+        function success() {
+          var createHtml = User.view.new();
+          $content.html(createHtml);
+        },
+        function error(err) {
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
     },
     edit: function (userId) {
       var $content = $('#content');
@@ -93,6 +118,7 @@ var User = {
             ${user[i].firstName}
             ${user[i].lastName}
           </a>
+          <button onclick="User.controller.new" type="button">New</button>
           <button onclick="User.controller.edit('${user[i]._id}')" type="button">edit</button>
           <button onclick="User.controller.destroy('${user[i]._id}')">delete</button>
         </li>
@@ -134,7 +160,25 @@ var User = {
     },
     // generate the HTML to create a new User
     new: function () {
-      // TODO: implement
+      var createHtml = `
+        <h4>New User</h4>
+
+        <form name="newUser">
+        <input type="hidden" name="userId">
+
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName">
+
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="lastName">
+
+        <label for="email">Email</label>
+        <input id="email" name="email">
+
+        <button onclick="User.controller.create(newUser)" type="button">Create</button>
+      </form>
+      `;
+      return createHtml;
     }
     // generate the HTML to edit an existing User
   },

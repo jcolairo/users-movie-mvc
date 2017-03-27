@@ -14,6 +14,32 @@ function indexUsers(req, res) {
   });
 }
 
+// Action: create
+function createUser(req, res) {
+  var newUser = new User();
+
+  newUser.firstName = req.body.firstName;
+  newUser.lastName = req.body.lastName;
+  newUser.email = req.body.email;
+
+  newUser.save(function (err) {
+    var errorJson = [];
+
+    if (err) {
+      for(var path in err.errors) {
+        errorJson.push({
+          path: path,
+          message: err.errors[path].message
+        });
+        console.log('Could not create new user: error:', err.errors[path].message);
+      }
+      res.status(200);
+      console.log('sdjsadjkdsajksdfjksdfjksdfjksdfjkdsjkdfsjksdfjksdfjksdfjksdfjksdfjknjkdsfn');
+      return;
+    }
+  });
+}
+
 // Action: update
 function updateUser(req, res) {
   var userId = req.params.id;
@@ -65,6 +91,7 @@ function destroyUser(req, res) {
 
 module.exports = {
   index: indexUsers,
+  create: createUser,
   update: updateUser,
   show: showUser,
   destroy: destroyUser
