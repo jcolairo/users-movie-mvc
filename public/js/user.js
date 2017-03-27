@@ -28,11 +28,50 @@ var User = {
     new: function () {
       // TODO: implement
     },
-    edit: function () {
-      // TODO: implement
+    edit: function (userId) {
+      var $content = $('#content');
+
+      User.model.show(
+        userId,
+        function success(data) {
+          var showHtml = User.view.edit(data);
+
+          $content.html(showHtml);
+        },
+        function error(err) {
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
     },
-    destroy: function () {
-      // TODO: implement
+    update: function (form) {
+      var updatedUser = {
+        id: form.userId.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        email: form.email.value
+      };
+
+      User.model.update(
+        updatedUser,
+        function success() {
+          User.controller.index();
+        },
+        function error(err) {
+          console.log('ERROR: err:', err);
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
+    },
+    destroy: function (userId) {
+      User.model.destroy(
+        userId,
+        function success() {
+          User.controller.index();
+        },
+        function error(err) {
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
     }
   },
   // the following object contains methods related to generating the View - ie, the HTML:
@@ -40,7 +79,7 @@ var User = {
     // this maps directly to the `index` route (remember the 7 RESTful routes?)
     index: function (user) {
       var html = `
-        <h2>Users</h2>
+        <h4>Users</h4>
         <ul>
       `;
 
@@ -50,8 +89,12 @@ var User = {
         //   - add buttons to view, edit & delete this user
         //   - on each button, you can add an `onclick` attribute that calls the relevant method on `User.controller`
         html += `<li>
-        ${user[i].firstName}
-        ${user[i].lastName}
+          <a href="/users/${user[i]._id}">
+            ${user[i].firstName}
+            ${user[i].lastName}
+          </a>
+          <button onclick="User.controller.edit('${user[i]._id}')" type="button">edit</button>
+          <button onclick="User.controller.destroy('${user[i]._id}')">delete</button>
         </li>
         `;
       }
@@ -69,14 +112,31 @@ var User = {
 
       return html;
     },
+    edit: function(user) {
+      return `
+        <h4>Edit User</h4>
+
+        <form name="editUser">
+        <input type="hidden" name="userId" value="${user._id}">
+
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName" value="${user.firstName}">
+
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="lastName" value="${user.lastName}">
+
+        <label for="email">Email</label>
+        <input id="email" name="email" value="${user.email}">
+
+        <button onclick="User.controller.update(editUser)" type="button">Update</button>
+      </form>
+      `;
+    },
     // generate the HTML to create a new User
     new: function () {
       // TODO: implement
-    },
-    // generate the HTML to edit an existing User
-    edit: function () {
-      // TODO: implement
     }
+    // generate the HTML to edit an existing User
   },
   // the following object contains model-related methods
   // ie AJAX calls to implement the relevant RESTful methods:
@@ -132,3 +192,5 @@ var User = {
     }
   }
 };
+
+// module.exports = User;

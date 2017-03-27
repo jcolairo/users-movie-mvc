@@ -14,7 +14,7 @@ var validationRules = {
     type: String,
     required: true
   },
-  players: [
+  movies: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Movie'

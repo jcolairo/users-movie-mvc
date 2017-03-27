@@ -1,50 +1,53 @@
-// TODO: implement seedData()
-console.warn('NOTE! This is where you will seed your database.');
-console.warn('NOTE! Remember to change Game & Player to your primary & secondary model names... and the comments too!');
-
 var mongoose = require('mongoose');
 var User = require('../models/user-model');
 var Movie = require('../models/movie-model');
+
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/sg-webdev4-project2-movie';
 
 function seedData() {
-  var user1 = new User();
-  var user2 = new User();
-  var movie = new Movie();
-  var userSaved = [];
+  var user = new User();
+  var movie1 = new Movie();
+  var movie2 = new Movie();
 
-  user1.firstName = 'John';
-  user1.lastName = 'Smith';
-  user1.email = 'jsmith@example.com';
-  user2.firstName = 'Bob';
-  user2.lastName = 'Far';
-  user2.email = 'bfar@example.com';
+  user.firstName = 'John';
+  user.lastName = 'Smith';
+  user.email = 'jsmith@example.com';
 
-  user1.save(function (err, user1Result) {
+  user.save(function (err, userSaved) {
     if (err) {
-      console.log('could not add', user1.firstName ,'to the menu: err:', err);
+      console.log('could not add', userSaved.firstName, ':', err);
       process.exit(1);
     }
-    userSaved.push(user1Result);
-    user2.save(function (err, user2Result) {
+    console.log('userSaved:', userSaved);
+    movie1.title = 'Rambo';
+    movie1.year = '1985';
+    movie1.genre = 'Action';
+    movie1.save(function (err, movie1Result) {
       if (err) {
-        console.log('could not add', user2.firstname ,'to the menu: err:', err);
+        console.log('could not create movie1: err:', err);
         process.exit(1);
       }
-      userSaved.push(user2Result);
-      console.log('userSaved:', userSaved);
-      user1.firstName = 'John';
-      user1.lastName = 'Smith';
-      user1.email = 'jsmith@example.com';
-      user1.menu.push(userSaved[0]._id);
-      user1.menu.push(userSaved[1]._id);
-      user1.save(function (err, userResult) {
+      console.log('movie1 saved:', movie1Result);
+      movie2.title = 'Fast and Furious';
+      movie2.year = '2016';
+      movie2.genre = 'Boo';
+      movie2.save(function (err, movie2Result) {
         if (err) {
-          console.log('could not create user: err:', err);
+          console.log('could not create movie2: err:', err);
           process.exit(1);
         }
-        console.log('user saved:', userResult);
-        mongoose.connection.close();
+        console.log('movie2 saved:', movie2Result);
+
+        userSaved.movies.push(movie1._id);
+        userSaved.movies.push(movie2._id);
+        userSaved.save(function (err, userWithMoviesSaved) {
+          if (err) {
+            console.log('could not update saved user with movies: err:', err);
+            process.exit(1);
+          }
+          console.log('user with movies saved:', userWithMoviesSaved);
+          mongoose.connection.close();
+        });
       });
     });
   });
@@ -65,10 +68,10 @@ function initDb() {
       console.log('emptied user collection');
       Movie.remove({}, function(err) {
         if (err) {
-          console.log('could not drop Food collection: err:', err);
+          console.log('could not drop Movie collection: err:', err);
           process.exit(1);
         }
-        console.log('emptied Food collection');
+        console.log('emptied Movie collection');
         seedData();
       });
     });
