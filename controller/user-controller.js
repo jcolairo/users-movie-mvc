@@ -22,21 +22,13 @@ function createUser(req, res) {
   newUser.lastName = req.body.lastName;
   newUser.email = req.body.email;
 
-  newUser.save(function (err) {
-    var errorJson = [];
-
+  newUser.save(function (err, savedUser) {
     if (err) {
-      for(var path in err.errors) {
-        errorJson.push({
-          path: path,
-          message: err.errors[path].message
-        });
-        console.log('Could not create new user: error:', err.errors[path].message);
-      }
-      res.status(200);
-      console.log('sdjsadjkdsajksdfjksdfjksdfjksdfjkdsjkdfsjksdfjksdfjksdfjksdfjksdfjknjkdsfn');
+      console.log('Could not create new user: error:', err.message);
+      res.status(500).json({ message: 'Could not create new user' });
       return;
     }
+    res.status(200).json(savedUser);
   });
 }
 
@@ -79,7 +71,7 @@ function showUser (req, res) {
 function destroyUser(req, res) {
   var userId = req.params.id;
 
-  User.deleteOne({_is: userId}, function (err) {
+  User.deleteOne({_id: userId}, function (err) {
     if (err) {
       console.log('Could not get user to delete:', err.message);
       res.status(404).json({ message: 'Could not get user to delete' });

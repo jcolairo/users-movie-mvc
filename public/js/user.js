@@ -22,18 +22,30 @@ var User = {
         }
       );
     },
-    show: function () {
-      // TODO: implement
-    },
-    create: function (userId) {
-      var $content = $('#content');
-
+    show: function (userId) {
       User.model.show(
         userId,
         function success(data) {
-          var showHtml = User.view.edit(data);
+          var showHtml = User.view.show(data);
 
-          $content.html(showHtml);
+          $('#content').html(showHtml);
+        },
+        function error(err) {
+          $('#error-message').html(err.responseJSON.message);
+        }
+      );
+    },
+    create: function (form) {
+      var newUser = {
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        email: form.email.value
+      };
+
+      User.model.create(
+        newUser,
+        function success() {
+          User.controller.index();
         },
         function error(err) {
           $('#error-message').html(err.responseJSON.message);
@@ -104,43 +116,36 @@ var User = {
     // this maps directly to the `index` route (remember the 7 RESTful routes?)
     index: function (user) {
       var html = `
-        <h4>Users</h4>
+        <h2>Users</h2>
         <ul>
       `;
 
       for(var i = 0; i < user.length ; i++) {
-        // TODO: fill this in properly!
-        // For example:
-        //   - add buttons to view, edit & delete this user
-        //   - on each button, you can add an `onclick` attribute that calls the relevant method on `User.controller`
-        html += `<li>
-          <a href="/users/${user[i]._id}">
-            ${user[i].firstName}
-            ${user[i].lastName}
-          </a>
-          <button onclick="User.controller.new" type="button">New</button>
-          <button onclick="User.controller.edit('${user[i]._id}')" type="button">edit</button>
-          <button onclick="User.controller.destroy('${user[i]._id}')">delete</button>
-        </li>
+        html += `
+          <li>
+            <a href="#" onclick="User.controller.show('${user[i]._id}')">${user[i].firstName} ${user[i].lastName}</a>
+            <button onclick="User.controller.new()" type="button">New</button>
+            <button onclick="User.controller.edit('${user[i]._id}')" type="button">edit</button>
+            <button onclick="User.controller.destroy('${user[i]._id}')" type="button">delete</button>
+          </li>
         `;
       }
 
       html += `</ul>`;
 
       html+= `
-      <form action="/users" method="POST" id="form-user">
-        <input id="create-input" type="text" name="firstName" placeholder="First Name">
-        <input type="text" name="lastName" placeholder="Last Name">
-        <input type="email" name="email" placeholder="Email">
-        <button id="btn-user-create">Create</button>
-      </form>
+        <form name="newUser">
+          <input type="text" name="firstName" placeholder="First Name">
+          <input type="text" name="lastName" placeholder="Last Name">
+          <input type="email" name="email" placeholder="Email">
+          <button onclick="User.controller.create(newUser)" type="button">Create</button>
+        </form>
       `;
-
       return html;
     },
     edit: function(user) {
       return `
-        <h4>Edit User</h4>
+        <h2>Edit User</h2>
 
         <form name="editUser">
         <input type="hidden" name="userId" value="${user._id}">
@@ -155,28 +160,58 @@ var User = {
         <input id="email" name="email" value="${user.email}">
 
         <button onclick="User.controller.update(editUser)" type="button">Update</button>
+        <button onclick="User.controller.index()" type="button">Cancel</button>
       </form>
       `;
+    },
+    show: function(user) {
+      var html = `
+        <h2>Show User</h2>
+
+        <p><strong>First name:</strong> ${user.firstName}</p>
+        <p><strong>Last name:</strong> ${user.lastName}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+
+        <p><strong>Movies:</strong></p>
+        <ul>
+      `;
+
+      for (var i = 0; i < user.movies.length; i++) {
+        html += `
+          <li>
+            <em>${user.movies[i].title}<em>
+            (${user.movies[i].year} &ndash; ${user.movies[i].genre})
+          </li>
+        `;
+      }
+
+      html += `
+        </ul>
+
+        <button onclick="User.controller.index()" type="button">Back</button>
+      `;
+
+      return html;
     },
     // generate the HTML to create a new User
     new: function () {
       var createHtml = `
-        <h4>New User</h4>
+        <h2>New User</h2>
 
         <form name="newUser">
-        <input type="hidden" name="userId">
+          <input type="hidden" name="userId">
 
-        <label for="firstName">First Name</label>
-        <input id="firstName" name="firstName">
+          <label for="firstName">First Name</label>
+          <input id="firstName" name="firstName">
 
-        <label for="lastName">Last Name</label>
-        <input id="lastName" name="lastName">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" name="lastName">
 
-        <label for="email">Email</label>
-        <input id="email" name="email">
+          <label for="email">Email</label>
+          <input id="email" name="email">
 
-        <button onclick="User.controller.create(newUser)" type="button">Create</button>
-      </form>
+          <button onclick="User.controller.create(newUser)" type="button">Create</button>
+        </form>
       `;
       return createHtml;
     }
