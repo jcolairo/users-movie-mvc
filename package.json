@@ -11,7 +11,7 @@
     "nodemon": "MONGODB_URI=mongodb://localhost/sg-webdev4-project2-movie nodemon server.js",
     "postinstall": "bower install",
     "seed": "node db/seed",
-    "test": "export MONGODB_URI=mongodb://localhost/sg-webdev4-project2-movie-test && node db/seed && mocha test/*.spec.js"
+    "test": "export MONGODB_URI=mongodb://localhost/sg-webdev4-project2-movie && node db/seed && mocha test/*.spec.js"
   },
   "author": "",
   "license": "ISC",
