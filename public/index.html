@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <h1>FAVOURITE MOVIES</h1>
+  <h1 class="mainH1">WHAT <br>ARE <br>YOUR <br>FAVOURITE <br>MOVIES?</h1>
+  <div class="enter">Click Here To Start</div>
+  <h1 class="innerH1">FAVOURITE MOVIES</h1>
 
   <div id="content">
 
@@ -21,5 +23,14 @@
 
   </div>
 <div class="curtain"></div>
+
 </body>
+<script>
+
+    $('.enter').click(function(){
+      $(this).fadeOut();
+      $('.mainH1').fadeOut();
+      $('.curtain').addClass('animate');
+    });
+</script>
 </html>
