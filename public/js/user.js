@@ -190,25 +190,22 @@ var User = {
           </li>
         `;
       }
-
+//NEW CHANGE BRO
       html += `
         </ul>
         <button class='backBtn' onclick="User.controller.index()" type="button">Back</button>
         `;
       html += `
-        <h2>New Movie</h2>
+        <h2 id='newMovieTitle'>New Movie</h2>
 
-        <form name="newMovie">
+        <form name="newMovie" id='newMovie'>
           <input type="hidden" name="userId" value="${user._id}">
 
-          <label for="title">Title</label>
-          <input id="title" name="title">
+          <input id="title" name="title" placeholder="Title">
 
-          <label for="year">Year</label>
-          <input id="year" name="year">
+          <input id="year" name="year" placeholder="Year">
 
-          <label for="genre">Genre</label>
-          <input id="genre" name="genre">
+          <input id="genre" name="genre" placeholder="Genre">
 
           <button onclick="Movie.controller.create(newMovie)" type="button">Create</button>
         </form>

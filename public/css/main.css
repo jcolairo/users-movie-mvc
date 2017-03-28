@@ -192,6 +192,8 @@ form input {
   position: relative;
   z-index: 1;
   display: block;
+  transition: color 0.2s linear;
+
 }
 
 a, a:visited {
@@ -229,6 +231,8 @@ input::-moz-focus-inner {
 input::-webkit-input-placeholder {
   color: #fff;
   text-align: center;
+  transition: color 0.2s linear;
+
 }
 
 #formNewUser {
@@ -276,7 +280,8 @@ padding: 5px;
 .backBtn {
   width: 50px;
   position: fixed !important;
-  top: 460px;
+  top: 540px;
+  left: 700px;
   background: black;
 }
 
@@ -325,12 +330,44 @@ padding: 5px;
   text-align: center;
   cursor: pointer;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -125px;
+  /*border: 1px solid green;*/
+
 }
 
 .enter:hover {
   background-color: #fff;
   color: #000;
-  border-color: #000;
+  border-color: #fff;
   transition: all .2s linear;
+}
+
+#newMovie {
+  position: fixed !important;
+  background-color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(10px);
+  width: 100%;
+  left: 0;
+}
+
+#newMovie input {
+  margin: 10px 10px;
+    padding: 5px;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: rgba(255,255,255,0);
+  transition: color 0.2s linear;
+}
+
+#newMovieTitle {
+  position: fixed;
+  top: 53%;
+  left: 0;
+  width: 100vw;
+  text-align: center;
 }
