@@ -1,5 +1,6 @@
 // define a globally-available object, which stores all functions related to a User
 // Note: this is a singleton, so we are following the convention of giving a singleton an init capital letter.
+
 var User = {
   controller: {
     index: function () {
@@ -30,8 +31,8 @@ var User = {
 
           $('#content').html(showHtml);
         },
-        function error(err) {
-          $('#error-message').html(err.responseJSON.message);
+        function error() {
+          // $('#error-message').html(err.responseJSON.message);
         }
       );
     },
@@ -124,7 +125,6 @@ var User = {
         html += `
           <li>
             <a href="#" onclick="User.controller.show('${user[i]._id}')">${user[i].firstName} ${user[i].lastName}</a>
-            <button onclick="User.controller.new()" type="button">New</button>
             <button onclick="User.controller.edit('${user[i]._id}')" type="button">edit</button>
             <button onclick="User.controller.destroy('${user[i]._id}')" type="button">delete</button>
           </li>
@@ -189,6 +189,24 @@ var User = {
         </ul>
 
         <button onclick="User.controller.index()" type="button">Back</button>
+      `;
+      html += `
+        <h2>New Movie</h2>
+
+        <form name="newMovie">
+          <input type="hidden" name="userId" value="${user._id}">
+
+          <label for="title">Title</label>
+          <input id="title" name="title">
+
+          <label for="year">Year</label>
+          <input id="year" name="year">
+
+          <label for="genre">Genre</label>
+          <input id="genre" name="genre">
+
+          <button onclick="Movie.controller.create(newMovie)" type="button">Create</button>
+        </form>
       `;
 
       return html;
@@ -271,5 +289,3 @@ var User = {
     }
   }
 };
-
-// module.exports = User;
