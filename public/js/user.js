@@ -190,7 +190,7 @@ var User = {
           </li>
         `;
       }
-//NEW CHANGE BRO
+
       html += `
         </ul>
         <button class='backBtn' onclick="User.controller.index()" type="button">Back</button>
@@ -205,7 +205,17 @@ var User = {
 
           <input id="year" name="year" placeholder="Year">
 
-          <input id="genre" name="genre" placeholder="Genre">
+         <select name="genre" id="genre" placeholder="Genre">
+           <option value="Action">Action</option>
+           <option value="Comedy">Comedy</option>
+           <option value="Thriller">Thriller</option>
+           <option value="Romance">Romance</option>
+           <option value="Horror">Horror</option>
+           <option value="Animation">Animation</option>
+           <option value="SciFi">SciFi</option>
+           <option value="Drama">Drama</option>
+           <option value="Documentary">Documentary</option>
+         </select>
 
           <button onclick="Movie.controller.create(newMovie)" type="button">Create</button>
         </form>

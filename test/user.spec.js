@@ -24,14 +24,14 @@ describe('Users', function () {
         done();
       });
     });
-    it('Should list all users for GET /users', function (done) {
+    it.only('Should list all users for GET /users', function (done) {
       request
       .get('/users')
       .end(function (err, res) {
         expect(err).to.be.null;
         res.should.have.status(200);
-        res.should.be.html;
-        res.text.should.match(/User list/);
+        // res.should.be.html;
+        res.text.should.match(/users/);
         done();
       });
     });
@@ -40,7 +40,7 @@ describe('Users', function () {
   describe('PUT', function () {
     it('Should return error for non-existing user id', function (done) {
       request
-      .put('/users/non-non-existent-user-id')
+      .put('/users/non-existent-user-id')
       .end(function (err, res) {
         res.should.have.status(404);
         done();
@@ -62,6 +62,31 @@ describe('Users', function () {
           res.text.should.match(/testLastName/);
           done();
         });
+      });
+    });
+
+    describe('DELETE', function () {
+      it('Should return error for non-existent user id', function (done) {
+        request
+        .delete('/users/non-existent-user-id')
+        .end(function (err, res) {
+          res.should.have.status(404);
+          done();
+        });
+      });
+      it('Should return result for existing user', function (done) {
+        request
+          .get('/users')
+          .end(function (err, res) {
+            var userId = TestUtils.getFirstUserIdFromUserListHTML(res.text);
+
+            request
+              .delete('/users/' + userId)
+              .end(function (err, res) {
+                res.should.have.status(200);
+                done();
+              });
+          });
       });
     });
   });
