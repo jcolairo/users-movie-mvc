@@ -1,6 +1,10 @@
 // define a globally-available object, which stores all functions related to a User
 // Note: this is a singleton, so we are following the convention of giving a singleton an init capital letter.
 
+
+
+
+
 var User = {
   controller: {
     index: function () {
@@ -117,7 +121,7 @@ var User = {
     // this maps directly to the `index` route (remember the 7 RESTful routes?)
     index: function (user) {
       var html = `
-        <h2>Users</h2>
+        <h2 id="userH2">Users</h2>
         <ul>
       `;
 
@@ -134,7 +138,8 @@ var User = {
       html += `</ul>`;
 
       html+= `
-        <form name="newUser">
+      <h2 class='newUserH2'>Add A New User</h2>
+        <form name="newUser" id='formNewUser'>
           <input type="text" name="firstName" placeholder="First Name">
           <input type="text" name="lastName" placeholder="Last Name">
           <input type="email" name="email" placeholder="Email">
@@ -145,9 +150,9 @@ var User = {
     },
     edit: function(user) {
       return `
-        <h2>Edit User</h2>
+      <h2 class='newUserH2' id='newUserH2'>Edit User</h2>
 
-        <form name="editUser">
+      <form name="editUser" id='editForm'>
         <input type="hidden" name="userId" value="${user._id}">
 
         <label for="firstName">First Name</label>
@@ -165,16 +170,17 @@ var User = {
       `;
     },
     show: function(user) {
-      var html = `
-        <h2>Show User</h2>
+      var html =
+        `
+          <h2 class='newUserH2' id='showUserH2' class='align'>Show User</h2>
 
-        <p><strong>First name:</strong> ${user.firstName}</p>
-        <p><strong>Last name:</strong> ${user.lastName}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
+          <p class='align' ><strong>First name:</strong> ${user.firstName}</p>
+          <p class='align'><strong>Last name:</strong> ${user.lastName}</p>
+          <p class='align'><strong>Email:</strong> ${user.email}</p>
 
-        <p><strong>Movies:</strong></p>
-        <ul>
-      `;
+          <ul id = 'movieList'>
+            <li class='align' id ='favTitle'><strong>Favourite Movies</strong></li>
+        `;
 
       for (var i = 0; i < user.movies.length; i++) {
         html += `
@@ -187,9 +193,8 @@ var User = {
 
       html += `
         </ul>
-
-        <button onclick="User.controller.index()" type="button">Back</button>
-      `;
+        <button class='backBtn' onclick="User.controller.index()" type="button">Back</button>
+        `;
       html += `
         <h2>New Movie</h2>
 

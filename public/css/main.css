@@ -1,3 +1,286 @@
 * {
   font-family: Helvetica, sans-serif;
 }
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+
+* {
+  font-family: 'Space Mono', monospace;
+  box-sizing: border-box;
+}
+
+body {
+  background: url('../images/bckgrnd.png') center center no-repeat;
+  background-size: cover;
+  background-position:0 -100px;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #fff;
+  font-size: 16px;
+}
+
+body:after {
+  content: '';
+  position: absolute;
+  width: 1200px;
+  height: 500px;
+  background: rgba(0, 0, 0, .7);
+  top: 50px;
+  left: 50%;
+  margin-left: -600px;
+  z-index: 0;
+  border: 5px solid black;
+  box-shadow:0 0 200px rgba(255, 255, 255, .2);
+
+}
+
+.curtain:before {
+  content: '';
+  position: absolute;
+  width: 50vw;
+  height: 100vh;
+  top: 0px;
+  left: 0;
+  background: url(../images/curtains-left.png) center center no-repeat;
+  background-size: cover;
+  z-index: 999;
+  animation: curtain-left 1.5s ease-in-out 2s forwards;
+}
+
+.curtain:after {
+  content: '';
+  position: absolute;
+  width: 50vw;
+  height: 100vh;
+  top: 0px;
+  right: 0;
+  background: url(../images/curtains-right.png) center center no-repeat;
+  background-size: cover;
+  z-index: 999;
+  animation: curtain-right 1.5s ease-in-out 2s forwards;
+}
+
+@keyframes curtain-left {
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+@keyframes curtain-right {
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+h1, h2, h4 {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  top: 70px;
+  margin-bottom: 50px;
+}
+
+h1:before {
+  content: '';
+  position: absolute;
+  height: 72vh;
+  width: 200px;
+  top: -90px;
+  left: -170px;
+  background: url('../images/curtains-sml-lef.png') center center no-repeat;
+background-size: cover;
+  z-index: 999;
+  box-shadow: 6px 10px 14px -5px rgba(0,0,0,0.75);
+
+}
+
+h1:after {
+  content: '';
+  position: absolute;
+  height: 72vh;
+  width: 200px;
+  top: -90px;
+  right: -170px;
+  background: url('../images/curtains-sml-right.png') center center no-repeat;
+background-size: cover;
+  z-index: 999;
+  box-shadow: -6px 10px 14px -5px rgba(0,0,0,0.75);
+
+}
+
+.curtain{
+  position: absolute;
+  width: 100vw;
+  height: 70px;
+  background: url('../images/curtains-top.png') center center no-repeat;
+  background-size: cover;
+  top: -20px;
+  z-index: 999;
+
+
+}
+
+h1 {
+  letter-spacing: .3em;
+  width: 1200px;
+  left: 125px;
+  padding-bottom: 10px;
+  background-color: black;
+  z-index: 5;
+  text-decoration: underline;
+}
+
+h2,h4 {
+  letter-spacing: .2em;
+}
+
+#userH2 {
+  position: fixed;
+  width: 1200px;
+  top: 115px;
+  padding: 10px;
+  background-color: black;
+  z-index: 5;
+}
+
+
+#content {
+  width: 1200px;
+  left: 125px;
+  height: 300px;
+  top: 60px;
+  overflow: scroll;
+  /*border: 1px solid red;*/
+  /*padding-top: 50px;*/
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+}
+#error-message {
+  position: absolute!important;
+}
+
+ul {
+  position: relative;
+  z-index: 1;
+  list-style-type: none
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: auto;
+}
+
+form input {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+a, a:visited {
+  color: #fff;
+  letter-spacing: .1em;
+  font-size: 1.2em;
+}
+
+button {
+  cursor: pointer;
+}
+
+button, input {
+  letter-spacing: .2em;
+  background-color: transparent;
+  color: #fff;
+  /*border-radius: 10%;*/
+  margin: 10px 0px;
+  text-align: center;
+}
+p {
+  margin: 0;
+}
+button:focus {
+  outline:0;
+
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input::-webkit-input-placeholder {
+  color: #fff;
+  text-align: center;
+}
+
+#formNewUser {
+  flex-direction: row;
+  height: 50px;
+  position: fixed;
+  top: 520px;
+  background-color: black;
+}
+
+#formNewUser input {
+margin: 10px 10px;
+padding: 5px;
+}
+
+.newUserH2 {
+  position: fixed;
+  top: 460px;
+  width: 1200px;
+  padding-bottom: 15px;
+  background: black;
+}
+
+#newUserH2, #showUserH2 {
+  top: 120px;
+}
+
+#editForm {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#editForm input {
+  width: 200px;
+  padding: 5px;
+}
+
+#movieList li {
+  margin: 10px;
+}
+
+.backBtn {
+  width: 50px;
+  position: fixed !important;
+  top: 460px;
+  background: black;
+}
+
+#movieList {
+  text-align: center;
+  padding-left: 0;
+}
+
+.align {
+  text-align: center;
+}
+
+#favTitle {
+  text-decoration: underline;
+}
