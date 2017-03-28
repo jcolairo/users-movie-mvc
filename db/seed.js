@@ -30,7 +30,7 @@ function seedData() {
       console.log('movie1 saved:', movie1Result);
       movie2.title = 'Fast and Furious';
       movie2.year = '2016';
-      movie2.genre = 'Boo';
+      movie2.genre = 'Action';
       movie2.save(function (err, movie2Result) {
         if (err) {
           console.log('could not create movie2: err:', err);
