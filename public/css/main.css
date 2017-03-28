@@ -50,7 +50,8 @@ body:after {
 }
 
 .animation:before {
-  animation: curtain-left 1.5s ease-in-out 2s forwards;
+  -webkit-animation: curtain-left 1.5s ease-in-out 2s forwards;
+          animation: curtain-left 1.5s ease-in-out 2s forwards;
 }
 
 .curtain:after {
@@ -65,21 +66,39 @@ body:after {
   z-index: 999;
 }
 .animate:before {
-  animation: curtain-left 1.5s ease-in-out 1s forwards;
+  -webkit-animation: curtain-left 1.5s ease-in-out 1s forwards;
+          animation: curtain-left 1.5s ease-in-out 1s forwards;
 }
 .animate:after {
-  animation: curtain-right 1.5s ease-in-out 1s forwards;
+  -webkit-animation: curtain-right 1.5s ease-in-out 1s forwards;
+          animation: curtain-right 1.5s ease-in-out 1s forwards;
+}
+
+@-webkit-keyframes curtain-left {
+  to {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+  }
 }
 
 @keyframes curtain-left {
   to {
-    transform: translateX(-100vw);
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+  }
+}
+
+@-webkit-keyframes curtain-right {
+  to {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
   }
 }
 
 @keyframes curtain-right {
   to {
-    transform: translateX(100vw);
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
   }
 }
 
@@ -165,10 +184,19 @@ h2,h4 {
   /*border: 1px solid red;*/
   /*padding-top: 50px;*/
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   z-index: 1;
 }
 #error-message {
@@ -182,9 +210,15 @@ ul {
 }
 
 form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
   height: auto;
 }
 
@@ -192,6 +226,7 @@ form input {
   position: relative;
   z-index: 1;
   display: block;
+  -webkit-transition: color 0.2s linear;
   transition: color 0.2s linear;
 
 }
@@ -231,12 +266,16 @@ input::-moz-focus-inner {
 input::-webkit-input-placeholder {
   color: #fff;
   text-align: center;
+  -webkit-transition: color 0.2s linear;
   transition: color 0.2s linear;
 
 }
 
 #formNewUser {
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   height: 50px;
   position: fixed;
   top: 520px;
@@ -262,10 +301,19 @@ padding: 5px;
 
 #editForm {
   height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #editForm input {
@@ -288,6 +336,7 @@ padding: 5px;
 #movieList {
   text-align: center;
   padding-left: 0;
+  overflow: scroll;
 }
 
 .align {
@@ -310,9 +359,15 @@ padding: 5px;
   left: 0;
   text-align: center;
   border: 1px solid green;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .enter {
@@ -339,17 +394,28 @@ padding: 5px;
   background-color: #fff;
   color: #000;
   border-color: #fff;
+  -webkit-transition: all .2s linear;
   transition: all .2s linear;
 }
 
 #newMovie {
   position: fixed !important;
   background-color: #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(10px);
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
   width: 100%;
   left: 0;
 }
@@ -361,6 +427,7 @@ padding: 5px;
 
 input:focus::-webkit-input-placeholder {
   color: rgba(255,255,255,0);
+  -webkit-transition: color 0.2s linear;
   transition: color 0.2s linear;
 }
 
@@ -370,4 +437,8 @@ input:focus::-webkit-input-placeholder {
   left: 0;
   width: 100vw;
   text-align: center;
+}
+
+p {
+  margin: 10px 0;
 }

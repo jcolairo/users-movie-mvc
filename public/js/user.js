@@ -177,9 +177,9 @@ var User = {
           <p class='align' ><strong>First name:</strong> ${user.firstName}</p>
           <p class='align'><strong>Last name:</strong> ${user.lastName}</p>
           <p class='align'><strong>Email:</strong> ${user.email}</p>
-
+          <p class='align' id ='favTitle'><strong>Favourite Movies</strong></p>
           <ul id = 'movieList'>
-            <li class='align' id ='favTitle'><strong>Favourite Movies</strong></li>
+
         `;
 
       for (var i = 0; i < user.movies.length; i++) {
