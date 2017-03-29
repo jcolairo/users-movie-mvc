@@ -24,13 +24,13 @@ describe('Users', function () {
         done();
       });
     });
-    it.only('Should list all users for GET /users', function (done) {
+    it('Should list all users for GET /users', function (done) {
       request
       .get('/users')
       .end(function (err, res) {
         expect(err).to.be.null;
         res.should.have.status(200);
-        // res.should.be.html;
+        res.should.be.html;
         res.text.should.match(/users/);
         done();
       });

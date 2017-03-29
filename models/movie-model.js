@@ -6,10 +6,12 @@ var validationRules = {
     required: true
   },
   year: {
-    type: Number
+    type: Number,
+    required: true
   },
   genre: {
-    type: String
+    type: String,
+    required: true
   }
 };
 var MovieSchema = new Schema(validationRules);

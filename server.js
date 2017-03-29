@@ -21,8 +21,8 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'));
 app.use(express.static('bower_components'));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 
 app.listen(PORT, function() {
